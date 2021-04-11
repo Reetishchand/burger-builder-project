@@ -255,9 +255,9 @@ root:
 
 ```js
 {
-  "extends"
+    "extends"
 :
-  "react-app"
+    "react-app"
 }
 ```
 
@@ -445,14 +445,15 @@ export default Button; // Don’t forget to use export default!
 
 ### `DangerButton.js`
 
+
 ```js
 import React, {Component} from 'react';
 import Button from './Button'; // Import a component from another file
 
 class DangerButton extends Component {
-  render() {
-    return <Button color="red"/>;
-  }
+    render() {
+        return <Button color="red"/>;
+    }
 }
 
 export default DangerButton;
@@ -495,30 +496,29 @@ const moduleA = 'Hello';
 
 export {moduleA};
 ```
-
 ### `App.js`
 
 ```js
 import React, {Component} from 'react';
 
 class App extends Component {
-  handleClick = () => {
-    import('./moduleA')
+    handleClick = () => {
+        import('./moduleA')
             .then(({moduleA}) => {
-              // Use moduleA
+                // Use moduleA
             })
             .catch(err => {
-              // Handle failure
+                // Handle failure
             });
-  };
+    };
 
-  render() {
-    return (
+    render() {
+        return (
             <div>
-              <button onClick={this.handleClick}>Load</button>
+                <button onClick={this.handleClick}>Load</button>
             </div>
-    );
-  }
+        );
+    }
 }
 
 export default App;
@@ -559,8 +559,8 @@ import './Button.css'; // Tell Webpack that Button.js uses these styles
 
 class Button extends Component {
   render() {
-    // You can use them as regular CSS styles
-    return <div className="Button"/>;
+      // You can use them as regular CSS styles
+      return <div className="Button"/>;
   }
 }
 ```
@@ -595,16 +595,16 @@ becomes this:
 
 ```css
 .App {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 ```
 
@@ -742,8 +742,8 @@ import logo from './logo.png'; // Tell Webpack this JS file uses this image
 console.log(logo); // /logo.84287d09.png
 
 function Header() {
-  // Import result is the URL of your image
-  return <img src={logo} alt="Logo"/>;
+    // Import result is the URL of your image
+    return <img src={logo} alt="Logo"/>;
 }
 
 export default Header;
@@ -802,7 +802,6 @@ called `PUBLIC_URL`.
 Inside `index.html`, you can use it like this:
 
 ```html
-
 <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 ```
 
@@ -818,10 +817,10 @@ In JavaScript code, you can use `process.env.PUBLIC_URL` for similar purposes:
 ```js
 render()
 {
-  // Note: this is an escape hatch and should be used sparingly!
+    // Note: this is an escape hatch and should be used sparingly!
   // Normally we recommend using `import` for getting asset URLs
-  // as described in “Adding Images and Fonts” above this section.
-  return <img src={process.env.PUBLIC_URL + '/img/logo.png'}/>;
+    // as described in “Adding Images and Fonts” above this section.
+    return <img src={process.env.PUBLIC_URL + '/img/logo.png'}/>;
 }
 ```
 
@@ -968,14 +967,14 @@ the environment inside a `<form>`:
 ```jsx
 render()
 {
-  return (
-          <div>
+    return (
+        <div>
             <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
             <form>
-              <input type="hidden" defaultValue={process.env.REACT_APP_SECRET_CODE}/>
+                <input type="hidden" defaultValue={process.env.REACT_APP_SECRET_CODE}/>
             </form>
-          </div>
-  );
+        </div>
+    );
 }
 ```
 
@@ -987,12 +986,11 @@ When you load the app in the browser and inspect the `<input>`, you will see its
 text will show the environment provided when using `npm start`:
 
 ```html
-
 <div>
   <small>You are running this application in <b>development</b> mode.</small>
-  <form>
-    <input type="hidden" value="abcdef"/>
-  </form>
+    <form>
+        <input type="hidden" value="abcdef"/>
+    </form>
 </div>
 ```
 
@@ -1209,23 +1207,23 @@ or [`http-proxy`](https://github.com/nodejitsu/node-http-proxy#options) supports
 
 ```js
 {
-  // ...
-  "proxy"
+    // ...
+    "proxy"
 :
-  {
-    "/api"
-  :
     {
-      "target"
+        "/api"
     :
-      "<url>",
-              "ws"
-    :
-      true
-      // ...
+        {
+            "target"
+        :
+            "<url>",
+                "ws"
+        :
+            true
+            // ...
+        }
     }
-  }
-  // ...
+    // ...
 }
 ```
 
@@ -1237,64 +1235,64 @@ matches using `*` and/or `**`, to match the path exactly or any subpath.
 
 ```js
 {
-  // ...
-  "proxy"
+    // ...
+    "proxy"
 :
-  {
-    // Matches any request starting with /api
-    "/api"
-  :
     {
-      "target"
+        // Matches any request starting with /api
+        "/api"
     :
-      "<url_1>",
-              "ws"
+        {
+            "target"
+        :
+            "<url_1>",
+                "ws"
+        :
+            true
+            // ...
+        }
+    ,
+        // Matches any request starting with /foo
+        "/foo"
     :
-      true
-      // ...
+        {
+            "target"
+        :
+            "<url_2>",
+                "ssl"
+        :
+            true,
+                "pathRewrite"
+        :
+            {
+                "^/foo"
+            :
+                "/foo/beta"
+            }
+            // ...
+        }
+    ,
+        // Matches /bar/abc.html but not /bar/sub/def.html
+        "/bar/*.html"
+    :
+        {
+            "target"
+        :
+            "<url_3>",
+            // ...
+        }
+    ,
+        // Matches /baz/abc.html and /baz/sub/def.html
+        "/baz/**/*.html"
+    :
+        {
+            "target"
+        :
+            "<url_4>"
+            // ...
+        }
     }
-  ,
-    // Matches any request starting with /foo
-    "/foo"
-  :
-    {
-      "target"
-    :
-      "<url_2>",
-              "ssl"
-    :
-      true,
-              "pathRewrite"
-    :
-      {
-        "^/foo"
-      :
-        "/foo/beta"
-      }
-      // ...
-    }
-  ,
-    // Matches /bar/abc.html but not /bar/sub/def.html
-    "/bar/*.html"
-  :
-    {
-      "target"
-    :
-      "<url_3>",
-      // ...
-    }
-  ,
-    // Matches /baz/abc.html and /baz/sub/def.html
-    "/baz/**/*.html"
-  :
-    {
-      "target"
-    :
-      "<url_4>"
-      // ...
-    }
-  }
-  // ...
+    // ...
 }
 ```
 
@@ -1316,27 +1314,27 @@ Either way, you can proxy WebSocket requests manually in `package.json`:
 
 ```js
 {
-  // ...
-  "proxy"
+    // ...
+    "proxy"
 :
-  {
-    "/socket"
-  :
     {
-      // Your compatible WebSocket server
-      "target"
+        "/socket"
     :
-      "ws://<socket_url>",
-              // Tell http-proxy-middleware that this is a WebSocket proxy.
-              // Also allows you to proxy WebSocket requests without an additional HTTP request
-              // https://github.com/chimurai/http-proxy-middleware#external-websocket-upgrade
-              "ws"
-    :
-      true
-      // ...
+        {
+            // Your compatible WebSocket server
+            "target"
+        :
+            "ws://<socket_url>",
+                // Tell http-proxy-middleware that this is a WebSocket proxy.
+                // Also allows you to proxy WebSocket requests without an additional HTTP request
+                // https://github.com/chimurai/http-proxy-middleware#external-websocket-upgrade
+                "ws"
+        :
+            true
+            // ...
+        }
     }
-  }
-  // ...
+    // ...
 }
 ```
 
@@ -1376,8 +1374,8 @@ reflect the current URL. To solve this, we recommend to add placeholders into th
 <!doctype html>
 <html lang="en">
 <head>
-  <meta property="og:title" content="__OG_TITLE__">
-  <meta property="og:description" content="__OG_DESCRIPTION__">
+    <meta property="og:title" content="__OG_TITLE__">
+    <meta property="og:description" content="__OG_DESCRIPTION__">
 ```
 
 Then, on the server, regardless of the backend you use, you can read `index.html` into memory and replace `__OG_TITLE__`
@@ -1520,8 +1518,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App/>, div);
+    const div = document.createElement('div');
+    ReactDOM.render(<App/>, div);
 });
 ```
 
@@ -1554,7 +1552,7 @@ import {shallow} from 'enzyme';
 import App from './App';
 
 it('renders without crashing', () => {
-  shallow(<App/>);
+    shallow(<App/>);
 });
 ```
 
@@ -1576,8 +1574,8 @@ import {shallow} from 'enzyme';
 import App from './App';
 
 it('renders welcome message', () => {
-  const wrapper = shallow(<App/>);
-  const welcome = <h2>Welcome to React</h2>;
+    const wrapper = shallow(<App/>);
+    const welcome = <h2>Welcome to React</h2>;
   // expect(wrapper.contains(welcome)).to.equal(true);
   expect(wrapper.contains(welcome)).toEqual(true);
 });
@@ -1639,7 +1637,6 @@ your tests, add a `src/setupTests.js` to your project. It will be automatically 
 For example:
 
 #### `src/setupTests.js`
-
 ```js
 const localStorageMock = {
   getItem: jest.fn(),
@@ -1675,14 +1672,12 @@ any warnings are encountered then the build fails.
 Popular CI servers already set the environment variable `CI` by default but you can do this yourself too:
 
 ### On CI servers
-
 #### Travis CI
 
 1. Following the [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) guide for syncing your
    GitHub repository with Travis. You may need to initialize some settings manually in
    your [profile](https://travis-ci.org/profile) page.
 1. Add a `.travis.yml` file to your git repository.
-
 ```
 language: node_js
 node_js:
@@ -1694,7 +1689,6 @@ script:
   - npm run build
   - npm test
 ```
-
 1. Trigger your first build with a git push.
 1. [Customize your Travis CI Build](https://docs.travis-ci.com/user/customizing-the-build/) if needed.
 
@@ -1704,7 +1698,6 @@ Follow [this article](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b
 Create React App project.
 
 ### On your own environment
-
 ##### Windows (cmd.exe)
 
 ```cmd
@@ -1741,15 +1734,15 @@ By default, the `package.json` of the generated project looks like this:
   "scripts"
 :
 {
-  "start"
+    "start"
 :
-  "react-scripts start",
-          "build"
+    "react-scripts start",
+        "build"
 :
-  "react-scripts build",
-          "test"
+    "react-scripts build",
+        "test"
 :
-  "react-scripts test --env=jsdom"
+    "react-scripts test --env=jsdom"
 ```
 
 If you know that none of your tests depend on [jsdom](https://github.com/tmpvar/jsdom), you can safely
@@ -1838,9 +1831,7 @@ After that, follow the instructions on the screen.
 Learn more about React Storybook:
 
 *
-
 Screencast: [Getting Started with React Storybook](https://egghead.io/lessons/react-getting-started-with-react-storybook)
-
 * [GitHub Repo](https://github.com/storybooks/storybook)
 * [Documentation](https://storybook.js.org/basics/introduction/)
 * [Snapshot Testing UI](https://github.com/storybooks/storybook/tree/master/addons/storyshots) with Storybook +
@@ -2134,7 +2125,6 @@ This will let Create React App correctly infer the root path to use in the gener
 More information [here](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).<br>
 <br>
 For example:
-
 ```js
 <BrowserRouter basename="/calendar"/>
 <Link to="/today"/> // renders <a href="/calendar/today">
